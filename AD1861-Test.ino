@@ -19,17 +19,17 @@ void setup() {
 }
 
 void loop() {
-  d = (sin(r) + 1.0) / 2;
+  d = sin(r) / 2;
 
-  writeWord(DATA, LE, CLK, long(d * 0x3ffffl));
+  writeWord(DATA, LE, CLK, (long)(d * 0x3ffffl));
 //  Serial.println(d);
 
-  r += 0.2;
+  r += 0.002;
 
-  //delay(500);
+//  delay(5);
 }
 
-void writeWord(int data, int le, int clk, unsigned long w) {
+void writeWord(int data, int le, int clk, long w) {
   digitalWrite(le, HIGH);
   //delay(DELAY);
   digitalWrite(clk, LOW);
