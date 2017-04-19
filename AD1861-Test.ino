@@ -24,146 +24,165 @@ void loop() {
   writeWord(DATA, LE, CLK, (long)(d * 0x3ffffl));
 //  Serial.println(d);
 
-  r += 0.002;
+  r += 0.02;
 
 //  delay(5);
 }
 
-void writeWord(int data, int le, int clk, long w) {
-  digitalWrite(le, HIGH);
+void writeWord(int data_pin, int le_pin, int clk_pin, long w) {
+  int le = 1 << le_pin;
+  int clk = 1 << clk_pin;
+  int data;
+  
+  PORTD = le;
+  
+  data = (!!(w & 0x20000l)) << data_pin;
+  PORTD = le | data;
   //delay(DELAY);
-  digitalWrite(clk, LOW);
+  PORTD = le | clk | data;
+  //delay(DELAY);
+  PORTD = le | data;
   //delay(DELAY);
   
-  digitalWrite(data, !!(w & 0x20000l));
+  data = (!!(w & 0x10000l)) << data_pin;
+  PORTD = le | data;
   //delay(DELAY);
-  digitalWrite(clk, HIGH);
+  PORTD = le | clk | data;
   //delay(DELAY);
-  digitalWrite(clk, LOW);
-  //delay(DELAY);
-  
-  digitalWrite(data, !!(w & 0x10000l));
-  //delay(DELAY);
-  digitalWrite(clk, HIGH);
-  //delay(DELAY);
-  digitalWrite(clk, LOW);
+  PORTD = le | data;
   //delay(DELAY);
   
-  digitalWrite(data, !!(w & 0x08000l));
+  data = (!!(w & 0x08000l)) << data_pin;
+  PORTD = le | data;
   //delay(DELAY);
-  digitalWrite(clk, HIGH);
+  PORTD = le | clk | data;
   //delay(DELAY);
-  digitalWrite(clk, LOW);
-  //delay(DELAY);
-  
-  digitalWrite(data, !!(w & 0x04000l));
-  //delay(DELAY);
-  digitalWrite(clk, HIGH);
-  //delay(DELAY);
-  digitalWrite(clk, LOW);
+  PORTD = le | data;
   //delay(DELAY);
   
-  digitalWrite(data, !!(w & 0x02000l));
+  data = (!!(w & 0x04000l)) << data_pin;
+  PORTD = le | data;
   //delay(DELAY);
-  digitalWrite(clk, HIGH);
+  PORTD = le | clk | data;
   //delay(DELAY);
-  digitalWrite(clk, LOW);
-  //delay(DELAY);
-  
-  digitalWrite(data, !!(w & 0x01000l));
-  //delay(DELAY);
-  digitalWrite(clk, HIGH);
-  //delay(DELAY);
-  digitalWrite(clk, LOW);
+  PORTD = le | data;
   //delay(DELAY);
   
-  digitalWrite(data, !!(w & 0x00800l));
+  data = (!!(w & 0x02000l)) << data_pin;
+  PORTD = le | data;
   //delay(DELAY);
-  digitalWrite(clk, HIGH);
+  PORTD = le | clk | data;
   //delay(DELAY);
-  digitalWrite(clk, LOW);
-  //delay(DELAY);
-  
-  digitalWrite(data, !!(w & 0x00400l));
-  //delay(DELAY);
-  digitalWrite(clk, HIGH);
-  //delay(DELAY);
-  digitalWrite(clk, LOW);
+  PORTD = le | data;
   //delay(DELAY);
   
-  digitalWrite(data, !!(w & 0x00200l));
+  data = (!!(w & 0x01000l)) << data_pin;
+  PORTD = le | data;
   //delay(DELAY);
-  digitalWrite(clk, HIGH);
+  PORTD = le | clk | data;
   //delay(DELAY);
-  digitalWrite(clk, LOW);
-  //delay(DELAY);
-  
-  digitalWrite(data, !!(w & 0x00100l));
-  //delay(DELAY);
-  digitalWrite(clk, HIGH);
-  //delay(DELAY);
-  digitalWrite(clk, LOW);
+  PORTD = le | data;
   //delay(DELAY);
   
-  digitalWrite(data, !!(w & 0x00080l));
+  data = (!!(w & 0x00800l)) << data_pin;
+  PORTD = le | data;
   //delay(DELAY);
-  digitalWrite(clk, HIGH);
+  PORTD = le | clk | data;
   //delay(DELAY);
-  digitalWrite(clk, LOW);
-  //delay(DELAY);
-  
-  digitalWrite(data, !!(w & 0x00040l));
-  //delay(DELAY);
-  digitalWrite(clk, HIGH);
-  //delay(DELAY);
-  digitalWrite(clk, LOW);
+  PORTD = le | data;
   //delay(DELAY);
   
-  digitalWrite(data, !!(w & 0x00020l));
+  data = (!!(w & 0x00400l)) << data_pin;
+  PORTD = le | data;
   //delay(DELAY);
-  digitalWrite(clk, HIGH);
+  PORTD = le | clk | data;
   //delay(DELAY);
-  digitalWrite(clk, LOW);
-  //delay(DELAY);
-  
-  digitalWrite(data, !!(w & 0x00010l));
-  //delay(DELAY);
-  digitalWrite(clk, HIGH);
-  //delay(DELAY);
-  digitalWrite(clk, LOW);
+  PORTD = le | data;
   //delay(DELAY);
   
-  digitalWrite(data, !!(w & 0x00008l));
+  data = (!!(w & 0x00200l)) << data_pin;
+  PORTD = le | data;
   //delay(DELAY);
-  digitalWrite(clk, HIGH);
+  PORTD = le | clk | data;
   //delay(DELAY);
-  digitalWrite(clk, LOW);
-  //delay(DELAY);
-  
-  digitalWrite(data, !!(w & 0x00004l));
-  //delay(DELAY);
-  digitalWrite(clk, HIGH);
-  //delay(DELAY);
-  digitalWrite(clk, LOW);
+  PORTD = le | data;
   //delay(DELAY);
   
-  digitalWrite(data, !!(w & 0x00002l));
+  data = (!!(w & 0x00100l)) << data_pin;
+  PORTD = le | data;
   //delay(DELAY);
-  digitalWrite(clk, HIGH);
+  PORTD = le | clk | data;
   //delay(DELAY);
-  digitalWrite(clk, LOW);
+  PORTD = le | data;
   //delay(DELAY);
   
-  digitalWrite(data, !!(w & 0x00001l));
+  data = (!!(w & 0x00080l)) << data_pin;
+  PORTD = le | data;
   //delay(DELAY);
-  digitalWrite(clk, HIGH);
+  PORTD = le | clk | data;
   //delay(DELAY);
-  digitalWrite(clk, LOW);
+  PORTD = le | data;
+  //delay(DELAY);
+  
+  data = (!!(w & 0x00040l)) << data_pin;
+  PORTD = le | data;
+  //delay(DELAY);
+  PORTD = le | clk | data;
+  //delay(DELAY);
+  PORTD = le | data;
+  //delay(DELAY);
+  
+  data = (!!(w & 0x00020l)) << data_pin;
+  PORTD = le | data;
+  //delay(DELAY);
+  PORTD = le | clk | data;
+  //delay(DELAY);
+  PORTD = le | data;
+  //delay(DELAY);
+  
+  data = (!!(w & 0x00010l)) << data_pin;
+  PORTD = le | data;
+  //delay(DELAY);
+  PORTD = le | clk | data;
+  //delay(DELAY);
+  PORTD = le | data;
+  //delay(DELAY);
+  
+  data = (!!(w & 0x00008l)) << data_pin;
+  PORTD = le | data;
+  //delay(DELAY);
+  PORTD = le | clk | data;
+  //delay(DELAY);
+  PORTD = le | data;
+  //delay(DELAY);
+  
+  data = (!!(w & 0x00004l)) << data_pin;
+  PORTD = le | data;
+  //delay(DELAY);
+  PORTD = le | clk | data;
+  //delay(DELAY);
+  PORTD = le | data;
+  //delay(DELAY);
+  
+  data = (!!(w & 0x00002l)) << data_pin;
+  PORTD = le | data;
+  //delay(DELAY);
+  PORTD = le | clk | data;
+  //delay(DELAY);
+  PORTD = le | data;
+  //delay(DELAY);
+  
+  data = (!!(w & 0x00001l)) << data_pin;
+  PORTD = le | data;
+  //delay(DELAY);
+  PORTD = le | clk | data;
+  //delay(DELAY);
+  PORTD = le | data;
   //delay(DELAY);
 
-  digitalWrite(le, LOW);
+  PORTD = 0;
   //delay(DELAY);
-  digitalWrite(le, HIGH);
+  PORTD = le;
   //delay(DELAY);
 }
 
